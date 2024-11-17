@@ -1,12 +1,13 @@
-import { Routes,Route, useNavigate } from 'react-router-dom'
+import { Routes,Route, useNavigate, Link } from 'react-router-dom'
 import './App.css'
 import { useState } from 'react'
 import Planet from './components/Planet'
 import People from './components/People'
+import Nav from './components/Nav'
 
 function App() {
 
-  const [category, setCategory] = useState("planet")
+  const [category, setCategory] = useState("")
   const [id, setId] = useState(0)
 
   {/*instance of use navigate */}
@@ -24,19 +25,18 @@ function App() {
 
   return (
     <>
-      <h1>Star Wars API</h1>
+      <Nav/>
       {/*Good way to check if your variables are updating */}
       <div>
-        Search for: 
-        <select onChange={(e) => setCategory(e.target.value)}>
-          <option value="planet">Planet</option>
-          <option value="people">People</option>
-        </select>
+        <h3>Choose a category</h3>
       </div>
       <div>
-        Id: <input onChange={(e) => setId(e.target.value)} value={id} type="number"/>
+        <Link to={<People/>}>
+          <button onClick={search}>People</button>
+        </Link>
+        <button onClick={search}>Planets</button>
+        <button onClick={search}>Starships</button>
       </div>
-      <button onClick={search}>Search!</button>
         <Routes>
           <Route path={"/people/:id"} element={<People/>}></Route>
           <Route path={"/planet/:id"} element={<Planet/>}></Route>
