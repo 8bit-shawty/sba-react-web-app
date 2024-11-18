@@ -7,7 +7,7 @@ import Nav from './components/Nav'
 
 function App() {
 
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("people")
   const [id, setId] = useState(0)
 
   {/*instance of use navigate */}
@@ -16,9 +16,11 @@ function App() {
   const search = (e) => {
     e.preventDefault();
 
-    const cat = category;
-    const dataId = id;
-    navigate(`/${cat}/${dataId}`);
+    if(id){
+      navigate(`/${category}/${id}`)
+    } else{
+      alert("Please enter a valid id")
+    }
   }
 
 
@@ -28,14 +30,28 @@ function App() {
       <Nav/>
       {/*Good way to check if your variables are updating */}
       <div>
-        <h3>Choose a category</h3>
-      </div>
-      <div>
-        <Link to={<People/>}>
-          <button onClick={search}>People</button>
-        </Link>
-        <button onClick={search}>Planets</button>
-        <button onClick={search}>Starships</button>
+      <h3>Select a category and search with an ID</h3>
+        <form onSubmit={search}>
+          <label htmlFor="category">Category:</label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="people">People</option>
+            <option value="planet">Planets</option>
+          </select>
+
+          <label htmlFor="id">ID:</label>
+          <input
+            type="number"
+            id="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+
+          <button type="submit">Search</button>
+        </form>
       </div>
         <Routes>
           <Route path={"/people/:id"} element={<People/>}></Route>
