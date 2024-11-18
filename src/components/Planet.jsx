@@ -19,6 +19,11 @@ const Planet = () => {
             setErr(false);
             console.log(data)
             const {name, population, terrain, diameter, climate} = data
+            setName(name)
+            setPopulation(population)
+            setTerrain(terrain)
+            setDiameter(diameter)
+            setClimate(climate)
         })
         .catch(({message}) => {
             console.log(message)
@@ -33,10 +38,10 @@ const Planet = () => {
                 : <></>
             }
             <h2>Planet Name: {name}</h2>
-            <p>id: {id}</p>
-            <p>Mass: {mass}</p>
-            <p>Height: {height}</p>
-            <p>Eyes: {eyes}</p>
+            <p>Population: {population}</p>
+            <p>Terrain Type: {terrain}</p>
+            <p>Diameter: {diameter}</p>
+            <p>Climate: {climate}</p>
         </>
     )
 }
